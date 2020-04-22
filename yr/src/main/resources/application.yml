@@ -1,0 +1,44 @@
+server:
+  port: 9000
+
+spring:
+  aop:
+    proxy-target-class: true
+    auto: true
+  datasource:
+    druid:
+      db1:
+        driver-class-name: com.mysql.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/test?characterEncoding=UTF-8&serverTimezone=UTC
+        username: root
+        password: root
+        type: com.alibaba.druid.pool.DruidDataSource
+      db2:
+        driver-class-name: com.mysql.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/test1?characterEncoding=UTF-8&serverTimezone=UTC
+        username: root
+        password: root
+        type: com.alibaba.druid.pool.DruidDataSource
+      initialSize: 5
+      minIdle: 1
+      maxActive: 50
+      max-wait: 600000
+      minEvictableIdleTimeMillis: 300000
+      validationQuery: SELECT 1 FROM DUAL
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      poolPreparedStatements: false
+      maxPoolPreparedStatementPerConnectionSize: 20
+      filters: stat,wall,log4j
+      connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+      useGlobalDataSourceStat: true
+
+mybatis-plus:
+  configuration:
+      # 是否开启自动驼峰命名规则映射:从数据库列名到Java属性驼峰命名的类似映射
+      map-underscore-to-camel-case: true
+      # 如果查询结果中包含空值的列，则 MyBatis 在映射的时候，不会映射这个字段
+      call-setters-on-nulls: true
+      # 这个配置会将执行的sql打印出来，在开发或测试的时候可以用
+      log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
